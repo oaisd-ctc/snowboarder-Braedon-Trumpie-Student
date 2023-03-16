@@ -5,10 +5,10 @@ using UnityEngine;
 public class Controls : MonoBehaviour
 {
     bool isGrounded;
-    [SerializeField] float forwardForceAmount = 1;
     [SerializeField] float torqueAmount = 1;
     [SerializeField] float speed = 1;
     Rigidbody2D rb2d;
+    bool canMove = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,18 +26,24 @@ public class Controls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.D))
+        if(canMove)
         {
-            rb2d.AddTorque(-torqueAmount);
-        }
-        else if(Input.GetKey(KeyCode.A))
-        {
-            rb2d.AddTorque(torqueAmount);
-        }
-        if(Input.GetKey(KeyCode.W) && isGrounded)
-        {
-            rb2d.AddRelativeForce(new Vector3(speed, 0, 0));
+            if(Input.GetKey(KeyCode.D))
+            {
+                rb2d.AddTorque(-torqueAmount);
+            }
+            else if(Input.GetKey(KeyCode.A))
+            {
+                rb2d.AddTorque(torqueAmount);
+            }
+            if(Input.GetKey(KeyCode.W) && isGrounded)
+            {
+                rb2d.AddRelativeForce(new Vector3(speed, 0, 0));
+            }
         }
     }
-    
+    public void DisableControls()
+    {
+        canMove = false;
+    }
 }
