@@ -41,6 +41,7 @@ public class Controls : MonoBehaviour
                 rb2d.AddRelativeForce(new Vector3(speed, 0, 0));
             }
         }
+        
     }
     public void DisableControls()
     {
